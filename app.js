@@ -13,6 +13,7 @@ const User = require("./models/user.js");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
+const user = require("./routes/user.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -66,18 +67,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/demouser", async (req, res) => {
-  let fakeUser = new User({
-    email: "student@gmail.com",
-    username: "student-01",
-  });
+// app.get("/demouser", async (req, res) => {
+//   let fakeUser = new User({
+//     email: "student@gmail.com",
+//     username: "student-01",
+//   });
 
-  let registeredUser = await User.register(fakeUser, "student01");
-  res.send(registeredUser);
-});
+//   let registeredUser = await User.register(fakeUser, "student01");
+//   res.send(registeredUser);
+// });
 
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);
+app.use("/", user);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
