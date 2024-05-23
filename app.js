@@ -14,6 +14,7 @@ const User = require("./models/user.js");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 const user = require("./routes/user.js");
+const { isLoggedIn } = require("./middleware.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
